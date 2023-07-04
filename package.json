@@ -1,0 +1,19 @@
+{
+  "name": "movie-app",
+  "version": "1.0.0",
+  "description": "Project made as part of Consume of API REST with JavaScript Practical Course.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlitoxe/movie-app.git"
+  },
+  "author": "carlitoxe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carlitoxe/movie-app/issues"
+  },
+  "homepage": "https://github.com/carlitoxe/movie-app#readme"
+}
