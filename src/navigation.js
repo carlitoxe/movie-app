@@ -46,7 +46,7 @@ function homePage() {
     headerSection.style.background = '';
     arrowBtn.classList.add('inactive');
     headerTitle.classList.remove('inactive');
-    // headerCategoryTitle.classList.add('inactive');
+    headerCategoryTitle.classList.add('inactive');
     searchForm.classList.remove('inactive');
 
     trendingPreviewSection.classList.remove('inactive');

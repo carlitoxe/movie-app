@@ -68,7 +68,7 @@ a {
 .header-title {
   display: flex;
   justify-content: center;
-  margin-top: 1.3rem;
+  margin: 1rem 0;
 }
 
 .movieDetail-title-link {
