@@ -56,6 +56,7 @@ function homePage() {
 
     getTrendingMoviesPreview();
     getCategoriesPreview();
+    smoothscroll();
 }
 
 function searchPage() {

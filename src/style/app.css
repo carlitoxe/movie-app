@@ -68,7 +68,11 @@ a {
 .header-title {
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin-top: 1.3rem
+}
+
+.header-title--categoryView {
+  margin-bottom: 1rem;
 }
 
 .movieDetail-title-link {
@@ -213,6 +217,10 @@ form svg {
     header {
         flex-direction: column;
         align-items: center;
+    }
+
+    .header-title {
+      margin: 2rem 0;
     }
 
     .header-container {
