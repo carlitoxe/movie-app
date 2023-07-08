@@ -468,7 +468,9 @@ form svg {
 .actor-container p {
   padding: 0 10px;
   margin: 0.5rem 0; 
-  text-wrap: wrap;
+  width: auto;
+  display: flex;
+  white-space: normal;
 }
 
 .actor-name {
