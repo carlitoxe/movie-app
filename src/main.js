@@ -216,6 +216,7 @@ async function getCast(id) {
     const cast = data.cast;
     console.log(cast);
     castContainer.innerHTML = '';
+    castContainer.scrollTo(0, 0);
     cast.forEach(actor => { 
         if (!actor.profile_path) {
             return;
@@ -234,7 +235,6 @@ async function getCast(id) {
         actorCharacter.textContent = actor.character;
         actorContainer.append(actorImg, actorName, actorCharacter);    
         castContainer.appendChild(actorContainer);
-
     })
 
     // movieDetailDirectorContainer.innerHTML = '';
