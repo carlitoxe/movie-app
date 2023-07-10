@@ -69,6 +69,7 @@ function searchPage() {
         headerTitle.classList.add('inactive');
         arrowBtn.classList.remove('inactive');
         searchForm.classList.remove('inactive');
+        searchQuery.classList.remove('inactive');
     } else {
         arrowBtn.classList.add('inactive');
         searchForm.classList.remove('inactive');
