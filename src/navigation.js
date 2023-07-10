@@ -79,6 +79,7 @@ function searchPage() {
     headerSection.style.background = '';
     // headerCategoryTitle.classList.remove('inactive');
 
+    searchQuery.classList.remove('inactive');
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive');
