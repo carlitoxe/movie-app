@@ -281,18 +281,44 @@ form svg {
   .trendingPreview-movieList {
     overflow-x: scroll;
     overflow-y: hidden;
-    white-space: nowrap;
-    height: 241px;
+    white-space: normal;
+    height: auto;
     padding-left: 24px;
     padding-bottom: 16px;
   }
   
-  .trendingPreview-movieList .movie-container {
-    display: inline-block;
+  .trendingPreview-movieList {
+    display: flex;
     margin-right: 1rem;
   }
+
+  .movie-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-right: 1rem;
+  }
+
+  .movie-title {
+    font-weight: 500;
+    margin-top: 0.2rem;
+  }
+
+  .movie-score {
+    margin-top: 0.8rem;
+  }
+
+  .movie-score::before {
+    content: '★';
+    color: var(--yellow);
+    padding-right: 4px;
+  }
+
+  .movie-title:hover {
+    color: var(--highlight-blue);
+  }
   
-  .trendingPreview-movieList .movie-container .movie-img {
+  .trendingPreview-movieList .movie-img {
     height: 225px;
     min-height: 225px;
     max-height: 225px;
@@ -371,8 +397,9 @@ form svg {
   }
   
   .genericList-container .movie-container {
-    display: inline-block;
+    /* display: inline-block; */
     width: 200px;
+    margin: 0;
   }
   
   .genericList-container .movie-img {
@@ -466,7 +493,7 @@ form svg {
   display: inline-block;
   min-width: 140px;
   width: 140px;
-  height: 270px;
+  height: auto;
   margin: 0 10px 10px 8px;
   border: 1px solid rgba(var(--lightGrey), 1);
   box-shadow: 0 2px 8px black;
@@ -520,7 +547,7 @@ form svg {
 
 .relatedMovies-container {
   margin-top: 24px;
-  height: 216px;
+  height: auto;
 }
 
 .relatedMovies-title {
@@ -528,17 +555,18 @@ form svg {
 }
 
 .relatedMovies-scrollContainer {
-  position: absolute;
+  /* position: absolute; */
   overflow-x: scroll;
   overflow-y: hidden;
-  white-space: nowrap;
+  white-space: normal;
   width: calc(75vw - 50px);
   padding-bottom: 16px;
+  display: flex;
 }
 
 .relatedMovies-scrollContainer .movie-container {
-  display: inline-block;
-  margin-right: 8px;
+  /* display: inline-block; */
+  margin-right: 1rem;
 }
 
 .relatedMovies-scrollContainer .movie-img {
@@ -600,7 +628,7 @@ form svg {
       
       .relatedMovies-container {
         margin-top: 24px;
-        height: 216px;
+        height: auto;
       }
       
       .relatedMovies-title {
@@ -608,17 +636,17 @@ form svg {
       }
       
       .relatedMovies-scrollContainer {
-        position: absolute;
+        /* position: absolute; */
         overflow-x: scroll;
         overflow-y: hidden;
-        white-space: nowrap;
+        /* white-space: normal; */
         width: calc(100vw - 50px);
         padding-bottom: 16px;
       }
       
       .relatedMovies-scrollContainer .movie-container {
-        display: inline-block;
-        margin-right: 8px;
+        /* display: inline-block; */
+        margin-right: 1rem;
       }
       
       .relatedMovies-scrollContainer .movie-img {
@@ -638,7 +666,7 @@ form svg {
 
   footer {
     margin-top: auto;
-    padding-top: 1rem;
+    /* padding-top: 1rem 0; */
     text-align: center;
     height: 48px;
     color: white;

@@ -16,6 +16,7 @@ const categoriesContainer = $('.categoriesPreview-list');
 const movieDetailCategoriesList = $('#movieDetail .categories-list');
 const relatedMoviesArticle = $('.relatedMovies-container');
 const relatedMoviesContainer = $('.relatedMovies-scrollContainer');
+const castContainerArticle = $('.cast-container');
 const castContainer = $('.cast-scrollContainer');
 
 // Elements

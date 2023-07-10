@@ -40,8 +40,16 @@ async function createMovies(movies, parentContainer) {
         movieImg.classList.add('movie-img');
         movieImg.setAttribute('alt', `${movie.title} poster`)
         movieImg.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+
+        const movieScore = document.createElement('span');
+        movieScore.classList.add('movie-score');
+        movieScore.textContent = movie.vote_average.toFixed(1);
+
+        const movieTitle = document.createElement('a');
+        movieTitle.classList.add('movie-title');
+        movieTitle.textContent = movie.title;
         
-        movieContainer.appendChild(movieImg);
+        movieContainer.append(movieImg, movieScore, movieTitle);
         //parentContainer.appendChild(movieContainer);
         toRender.push(movieContainer);
     });
@@ -214,7 +222,10 @@ async function getDirector(id) {
 async function getCast(id) {
     const { data } = await api(`movie/${id}/credits`);
     const cast = data.cast;
-    console.log(cast);
+    // console.log(cast);
+    if (cast.length < 1) {
+        castContainerArticle.classList.add('inactive');
+    }
     castContainer.innerHTML = '';
     castContainer.scrollTo(0, 0);
     cast.forEach(actor => { 
@@ -254,14 +265,18 @@ async function getCast(id) {
 async function getTrailerMovie(id) {
     const { data } = await api(`movie/${id}/videos`);
     const videos = data.results;
-    // console.log(videos);
+    console.log(videos);
 
+    const officialTrailer = videos.find(video => video.type === 'Trailer' && video.official);
     const trailer = videos.find(video => video.type === 'Trailer');
-    if(videos.length < 1) {
+    if(officialTrailer) {
+        movieDetailTrailer.src = `https://www.youtube.com/embed/${officialTrailer.key}`
+    } else if (trailer) {
+        movieDetailTrailer.src = `https://www.youtube.com/embed/${trailer.key}`
+    } else {
         movieDetailTrailerContainer.classList.add('inactive');
     }
 
-    movieDetailTrailer.src = `https://www.youtube.com/embed/${trailer.key}`
 
     
 }
