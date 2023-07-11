@@ -142,6 +142,7 @@ function movieDetailsPage() {
         arrowBtn.classList.add('inactive');
         headerTitle.classList.remove('inactive');
         searchForm.classList.remove('inactive');
+        movieDetailPosterContainer.classList.remove('inactive');
     }
 
     headerSection.classList.add('header-container--long');
