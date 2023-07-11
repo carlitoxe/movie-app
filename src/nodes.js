@@ -19,6 +19,8 @@ const relatedMoviesContainer = $('.relatedMovies-scrollContainer');
 const castContainerArticle = $('.cast-container');
 const castContainer = $('.cast-scrollContainer');
 
+const movieDetailPosterContainer = $('.movieDetail-poster');
+
 // Elements
 
 const headerTitle = $('.header-title');

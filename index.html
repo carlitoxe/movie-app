@@ -35,6 +35,21 @@
       </div>
 
       <article class="trendingPreview-movieList">
+        <template class="movie-container-template">
+          <div class="movie-container">
+            <div class="movie-img--loading"></div>
+            <div class="movie-score--loading"></div>
+            <a class="movie-title--loading"></a>          
+          </div>
+        </template>
+        <!-- <div class="movie-container movie-container--loading"></div>
+        <div class="movie-container movie-container--loading"></div>
+        <div class="movie-container movie-container--loading"></div>
+        <div class="movie-container movie-container--loading"></div>
+        <div class="movie-container movie-container--loading"></div>
+        <div class="movie-container movie-container--loading"></div>
+        <div class="movie-container movie-container--loading"></div> -->
+
 <!--             <div class="movie-container">
                 <img 
                     src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" 
@@ -49,6 +64,9 @@
     <section id="categoriesPreview" class="categoriesPreview-container">
       <h2 class="categoriesPreview-title">Categories</h2>
         <article class="categoriesPreview-list">
+                    <div class="category-container category-container--loading"></div>
+                    <div class="category-container category-container--loading"></div>
+
 <!--           <div class="category-container">
             <h3 id="id28" class="category-title">Romance</h3>
           </div> -->
@@ -59,6 +77,13 @@
 
    
     <section id="genericList" class="genericList-container">
+      <template class="movie-container-template">
+        <div class="movie-container">
+          <div class="movie-img--loading"></div>
+          <div class="movie-score--loading"></div>
+          <a class="movie-title--loading"></a>          
+        </div>
+      </template>
 <!--       <div class="movie-container">
         <img
           src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg"
@@ -70,8 +95,10 @@
     </section>
 
     <section id="movieDetail" class="movieDetail-container inactive">
+      <!-- <div class="movieDetail-poster--loading"></div> -->
       <div class="movieDetail-poster">
-        <img id="movieDetail-poster" class="movie-img" src="" alt="poster">
+        <div class="movieDetail-poster--loading"></div> 
+        <img id="movieDetail-poster" src="">
       </div>
       <div class="movieDetail-info-container">
         <h1 class="movieDetail-title"><a href="" class="movieDetail-title-link"></a><span class="release-date"></span></h1>
@@ -85,6 +112,9 @@
           <!-- <span class="movieDetail-director"></span> -->
         </div>
         <article class="categories-list">
+          <div class="category-container category-container--loading"></div>
+          <div class="category-container category-container--loading"></div>
+          <div class="category-container category-container--loading"></div>
 <!--           <div class="category-container">
             <h3 id="id28" class="category-title">Romance</h3>
           </div>
@@ -102,14 +132,19 @@
           <h2 class="cast-title">Cast</h2>
         
           <ol class="cast-scrollContainer">
-            <li class="actor-container">
+
+            <template class="movie-container-template">
+              <li class="actor-container"></li>
+
+            </template>
+            <!-- <li class="actor-container">
                 <img
                   src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg"
                   class="actor-img"
                   alt="actor name"
                 />
                 <p></p>
-            </li>
+            </li> -->
           </ol> 
         </article>
 
@@ -124,8 +159,16 @@
         
         <article class="relatedMovies-container">
           <h2 class="relatedMovies-title">Similar movies</h2>
-        
+
           <div class="relatedMovies-scrollContainer">
+            <template class="movie-container-template">
+              <div class="movie-container">
+                <div class="movie-img--loading"></div>
+                <div class="movie-score--loading"></div>
+                <a class="movie-title--loading"></a>          
+              </div>
+            </template>
+
             <!-- <div class="movie-container">
               <img
                 src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg"

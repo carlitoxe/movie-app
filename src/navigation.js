@@ -23,6 +23,14 @@ function smoothscroll(){
     }
 };
 
+const cardTemplate = document.querySelector(".movie-container-template");
+for (let i = 0; i < 8; i++) {
+    trendingMovieListContainer.append(cardTemplate.content.cloneNode(true));
+    relatedMoviesContainer.append(cardTemplate.content.cloneNode(true));
+    castContainer.append(cardTemplate.content.cloneNode(true));
+}
+
+
 function navigator() {
     // console.log({ location });
 
@@ -129,7 +137,7 @@ function movieDetailsPage() {
         headerTitle.classList.add('inactive');
         arrowBtn.classList.remove('inactive');
         searchForm.classList.add('inactive');
-        movieDetailPoster.classList.add('inactive');
+        movieDetailPosterContainer.classList.add('inactive');
     } else {
         arrowBtn.classList.add('inactive');
         headerTitle.classList.remove('inactive');

@@ -136,37 +136,47 @@ async function getTrendingMovies() {
 async function getMovieDetails(id) { 
     const { data: movie } = await api(`movie/${id}`);
 
+    // const loading = document.querySelector('.movieDetail-poster--loading');
+    // loading.classList.add('inactive');
+    // movieDetailSection.innerHTML = '';
+    movieDetailPosterContainer.innerHTML = ''
+    const movieDetailPoster = document.createElement('img');
+    movieDetailPoster.id = 'movieDetail-poster';
+    movieDetailPoster.classList.add('movie-img');
+    movieDetailPosterContainer.append(movieDetailPoster);
     movieDetailTitle.textContent = movie.title;
     movieDetailTitle.href = location.href;
     movieDetailDescription.textContent = movie.overview;
     movieDetailScore.textContent = movie.vote_average.toFixed(1);
     movieDetailPoster.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-    const [releaseYear, , ] = movie.release_date.split('-');
 
+    const [releaseYear, , ] = movie.release_date.split('-');
+    
     releaseYear ? 
-        movieDetailReleaseDate.textContent = ` (${releaseYear})` : 
-        movieDetailReleaseDate.textContent = '';
+    movieDetailReleaseDate.textContent = ` (${releaseYear})` : 
+    movieDetailReleaseDate.textContent = '';
     
     // console.log(movie.runtime);
     let hours = (movie.runtime / 60);
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
     let rminutes = Math.round(minutes);
-
+    
     movieDetailRuntime.textContent = `${rhours}h ${rminutes}min`
-
+    
     createCategories(movie.genres, movieDetailCategoriesList);
-
+    
     let x = window.matchMedia('(max-width: 768px)');
-
+    
     if (x.matches) {
         const movieImgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
         headerSection.style.background = `
-            linear-gradient(180deg, rgba(0, 0, 0, 0.35) 19.27%, rgba(0, 0, 0, 0) 29.17%),
-            url(${movieImgUrl})
+        linear-gradient(180deg, rgba(0, 0, 0, 0.35) 19.27%, rgba(0, 0, 0, 0) 29.17%),
+        url(${movieImgUrl})
         `;
     }
-
+    
+    // movieDetailSection.append(movieDetailPoster);
 
     getRelatedMovies(id);
     getDirector(id);
@@ -265,10 +275,11 @@ async function getCast(id) {
 async function getTrailerMovie(id) {
     const { data } = await api(`movie/${id}/videos`);
     const videos = data.results;
-    console.log(videos);
+    // console.log(videos);
 
     const officialTrailer = videos.find(video => video.type === 'Trailer' && video.official);
     const trailer = videos.find(video => video.type === 'Trailer');
+    console.log(trailer);
     if(officialTrailer) {
         movieDetailTrailer.src = `https://www.youtube.com/embed/${officialTrailer.key}`
     } else if (trailer) {

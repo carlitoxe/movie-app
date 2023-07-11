@@ -207,12 +207,61 @@ form svg {
   .movie-container {
     cursor: pointer;
   }
+
+  .movie-img--loading {
+    background: var(--gray);
+    border-radius: 8px;
+    height: 225px;
+    min-height: 225px;
+    max-height: 225px;
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    margin-bottom: 15px;
+    animation: loading-skeleton infinite 1.5s;
+  }
+
+  .movieDetail-poster--loading {
+
+  }
+
+  .movie-score--loading {
+    width: 100%;
+    border-radius: 8px;
+    height: 1rem;
+    background: var(--gray);
+    animation: loading-skeleton infinite 1.5s;
+    /* margin-top: 0.8rem; */
+  }
   
   .movie-img {
     border-radius: 8px;
   }
-  
 
+  .movie-title--loading {
+    height: 1.5rem;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.2rem;
+    background: var(--gray);
+    animation: loading-skeleton infinite 1.5s;
+  }
+
+  .category-container--loading {
+    background: var(--gray);
+    border-radius: 8px;
+    height: 25px;
+    width: 45%;
+    /* min-width: 150px; */
+    /* max-width: 150px; */
+    margin-bottom: 15px;
+    margin-top: 1rem;
+    animation: loading-skeleton infinite 1.5s;
+  }
+  .category-container--loading:nth-child(2) {
+    animation-delay: .2s;
+  }
+    
 @media only screen and (max-width: 768px) {
     header {
         flex-direction: column;
@@ -279,18 +328,17 @@ form svg {
   }
   
   .trendingPreview-movieList {
+    display: flex;
+    margin-right: 1rem;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: normal;
+    min-height: 320px;
     height: auto;
     padding-left: 24px;
     padding-bottom: 16px;
   }
   
-  .trendingPreview-movieList {
-    display: flex;
-    margin-right: 1rem;
-  }
 
   .movie-container {
     display: flex;
@@ -433,7 +481,19 @@ form svg {
 }
 
 .movieDetail-poster .movie-img {
+    min-width: 250px;
     width: 250px;
+    height: 375px;
+    border-radius: 8px;
+}
+
+.movieDetail-poster--loading {
+    border-radius: 8px;
+    min-width: 250px;
+    width: 250px;
+    height: 375px;
+    background: var(--gray);
+    animation: loading-skeleton infinite 1.5s;
 }
 
 .movieDetail-score {
@@ -555,13 +615,13 @@ form svg {
 }
 
 .relatedMovies-scrollContainer {
+  display: flex;
   /* position: absolute; */
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: normal;
   width: calc(75vw - 50px);
   padding-bottom: 16px;
-  display: flex;
 }
 
 .relatedMovies-scrollContainer .movie-container {
@@ -682,3 +742,13 @@ form svg {
     display: none;
  }
   
+
+/* Animations */
+@keyframes loading-skeleton {
+  0%, 100% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0%;
+  }
+}
