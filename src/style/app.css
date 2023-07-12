@@ -123,6 +123,7 @@ button {
 .search-query-title {
   margin-top: 2rem;
   text-align: center;
+  padding: 0 2rem;
 }
 
 /* Header */
@@ -221,9 +222,30 @@ form svg {
     animation: loading-skeleton infinite 1.5s;
   }
 
-  .movieDetail-poster--loading {
-
+  .img-container--noimg {
+    display: flex;
+    background: var(--gray);
+    border-radius: 8px;
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
+    width: 200px;
+    min-width: 200x;
+    max-width: 200px;
+    margin-bottom: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
   }
+
+  .img-container--noimg span {
+    text-align: center;
+    font-size: 1.5rem;  
+    padding: 0 1rem;
+  }
+  /* .movieDetail-poster--loading {
+
+  } */
 
   .movie-score--loading {
     width: 100%;
@@ -260,6 +282,29 @@ form svg {
   }
   .category-container--loading:nth-child(2) {
     animation-delay: .2s;
+  }
+
+  .relatedMovies-img-container--noimg {
+      display: flex;
+      background: var(--gray);
+      border-radius: 8px;
+      height: 187.5px;
+      min-height: 187.5px;
+      max-height: 187.5px;
+      width: 125px;
+      min-width: 125x;
+      max-width: 125px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0;
+  
+  }
+
+  .relatedMovies-img-container--noimg span {
+    text-align: center;
+    font-size: 1.2rem;  
+    padding: 0 1rem;
+    color: white;
   }
     
 @media only screen and (max-width: 768px) {
@@ -309,6 +354,33 @@ form svg {
 .movieDetail-title-link {
   color: black;
 }
+
+.search-query-title {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+  .img-container--noimg {
+    display: flex;
+    background: var(--lightGrey);
+    border-radius: 8px;
+    height: 187.5px;
+    min-height: 187.5px;
+    max-height: 187.5px;
+    width: 125px;
+    min-width: 125x;
+    max-width: 125px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .img-container--noimg span {
+    text-align: center;
+    font-size: 1.2rem;  
+    padding: 0 1rem;
+    color: black;
+  }
 
 
 }
@@ -452,6 +524,8 @@ form svg {
   
   .genericList-container .movie-img {
     width: 100%;
+    min-height: 250px;
+    height: 300px;
   }
 
   /* Movie Detail */
@@ -592,6 +666,8 @@ form svg {
   width: 100%;
   padding-top: 56.25%;
 }
+
+
 
 .movieDetail-trailer {
   position: absolute;

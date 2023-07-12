@@ -19,37 +19,77 @@ searchFormInput.addEventListener('focusout', () => {
     searchForm.classList.remove('search-form--focused')
 })
 
+// Observer
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        const img = entry.target;
+        if (entry.isIntersecting) {
+            // console.log(img);
+            const url = img.dataset.src;
+            if (url) img.src = url;
+            observer.unobserve(img)
+        } else {
+            return
+        }
+    })
+})
+
+
 
 // Utils
 
-async function createMovies(movies, parentContainer) {
+async function createMovies(movies, parentContainer, lazyLoad = false) {
 
     parentContainer.innerHTML = '';
     const toRender = [];
     movies.forEach(movie => {
-        if (!movie.poster_path) {
-            return;
-        }
+
         const movieContainer = document.createElement('div');
         movieContainer.classList.add('movie-container');
         movieContainer.addEventListener('click', () => {
             location.hash = `movie=${movie.id}`;
         });
 
-        const movieImg = document.createElement('img');
-        movieImg.classList.add('movie-img');
-        movieImg.setAttribute('alt', `${movie.title} poster`)
-        movieImg.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+            const movieImg = document.createElement('img');
+            movieImg.classList.add('movie-img');
+            movieImg.setAttribute('alt', `${movie.title} poster`)
+            observer.observe(movieImg);
+            lazyLoad ? 
+            movieImg.dataset.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}` :
+            movieImg.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}` 
+            if (movie.poster_path) movieContainer.appendChild(movieImg);
+            movieImg.addEventListener('error', () => {
+                const div = document.createElement('div');
+                if (parentContainer.className === 'relatedMovies-scrollContainer') {
+                    div.classList.add('relatedMovies-img-container--noimg');
+                }
+                div.classList.add('img-container--noimg');
+                const span = document.createElement('span');
+                span.textContent = movie.title;
+                div.append(span);
+                movieContainer.prepend(div);
+            });
 
+
+            // DIV FOR NO IMG 
+            // const div = document.createElement('div');
+            // div.classList.add('img-container--noimg');
+            // const span = document.createElement('span');
+            // span.textContent = movie.title;
+            // div.append(span);
+            // movieContainer.append(div);
+        
+        
         const movieScore = document.createElement('span');
         movieScore.classList.add('movie-score');
         movieScore.textContent = movie.vote_average.toFixed(1);
-
+        
         const movieTitle = document.createElement('a');
         movieTitle.classList.add('movie-title');
         movieTitle.textContent = movie.title;
         
-        movieContainer.append(movieImg, movieScore, movieTitle);
+        movieContainer.append(movieScore, movieTitle);
         //parentContainer.appendChild(movieContainer);
         toRender.push(movieContainer);
     });
@@ -85,7 +125,7 @@ async function getTrendingMoviesPreview() {
     const { data } = await api('trending/movie/day');
     const movies = data.results;
 
-    createMovies(movies, trendingMovieListContainer);
+    createMovies(movies, trendingMovieListContainer, true);
 }
 
 async function getCategoriesPreview() { 
@@ -105,7 +145,7 @@ async function getMoviesByCategory(id) {
     });
 
     const movies = data.results;
-    createMovies(movies, genericSection)
+    createMovies(movies, genericSection, true)
 }
 
 async function getMoviesBySearch(query) { 
@@ -119,10 +159,12 @@ async function getMoviesBySearch(query) {
     console.log(movies);
     createMovies(movies, genericSection)
     if (movies.length < 1) {
-        genericSection.textContent = 'We coulnt find anything, try again with another name';
+        searchQuery.innerHTML = '';
+        searchQuery.textContent = `Nothing found for: ${query}. Try again with another name.`;
+    } else {
+        searchQuery.textContent = `Results for: ${query}`
     }
 
-    searchQuery.textContent = `Results for: ${query}`
 
 }
 
@@ -148,7 +190,8 @@ async function getMovieDetails(id) {
     movieDetailTitle.href = location.href;
     movieDetailDescription.textContent = movie.overview;
     movieDetailScore.textContent = movie.vote_average.toFixed(1);
-    movieDetailPoster.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+    movieDetailPoster.dataset.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+    observer.observe(movieDetailPoster);
 
     const [releaseYear, , ] = movie.release_date.split('-');
     
@@ -247,7 +290,9 @@ async function getCast(id) {
         const actorImg = document.createElement('img');
         actorImg.classList.add('actor-img');
         actorImg.alt = `${actor.name} image`;
-        actorImg.src = `https://www.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`;
+        actorImg.dataset.src = `https://www.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`;
+        observer.observe(actorImg);
+        
         const actorName = document.createElement('p');
         actorName.classList.add('actor-name');
         actorName.textContent = actor.name;
@@ -277,9 +322,10 @@ async function getTrailerMovie(id) {
     const videos = data.results;
     // console.log(videos);
 
+    
     const officialTrailer = videos.find(video => video.type === 'Trailer' && video.official);
     const trailer = videos.find(video => video.type === 'Trailer');
-    console.log(trailer);
+    // console.log(trailer);
     if(officialTrailer) {
         movieDetailTrailer.src = `https://www.youtube.com/embed/${officialTrailer.key}`
     } else if (trailer) {

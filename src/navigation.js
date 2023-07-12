@@ -23,6 +23,7 @@ function smoothscroll(){
     }
 };
 
+
 const cardTemplate = document.querySelector(".movie-container-template");
 for (let i = 0; i < 8; i++) {
     trendingMovieListContainer.append(cardTemplate.content.cloneNode(true));

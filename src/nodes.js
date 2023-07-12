@@ -20,6 +20,7 @@ const castContainerArticle = $('.cast-container');
 const castContainer = $('.cast-scrollContainer');
 
 const movieDetailPosterContainer = $('.movieDetail-poster');
+const trailerContainer = $('.iframe-container');
 
 // Elements
 

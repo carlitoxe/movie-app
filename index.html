@@ -42,20 +42,14 @@
             <a class="movie-title--loading"></a>          
           </div>
         </template>
-        <!-- <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading"></div> -->
 
 <!--             <div class="movie-container">
                 <img 
-                    src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" 
+                    data-src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" 
                     class="movie-img"
                     alt="Movie name"
                 />
+                <p>Movie score</p>
                 <p>Movie title</p>
             </div> -->
         </article>
@@ -74,8 +68,6 @@
     </section>
 
     <h2 class="search-query-title"></h2>
-
-   
     <section id="genericList" class="genericList-container">
       <template class="movie-container-template">
         <div class="movie-container">
@@ -150,9 +142,12 @@
 
         <article class="trailer-container">
           <h2>Trailer</h2>
+          <!-- <div class="iframe-container">
+                <iframe class="movieDetail-trailer--loading" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              </div> -->
           <div class="iframe-container">
             <iframe class="movieDetail-trailer" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
           </div>
 
         </article>
