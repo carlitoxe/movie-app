@@ -260,6 +260,10 @@ form svg {
     border-radius: 8px;
   }
 
+  .no-image {
+    object-fit: cover;
+  }
+
   .movie-title--loading {
     height: 1.5rem;
     width: 100%;
@@ -541,6 +545,13 @@ form svg {
   padding: 0;
   color: white;
   font-size: 2rem;
+}
+
+.movieDetail-poster {
+  min-width: 250px;
+  width: 250px;
+  height: 375px;
+  border-radius: 8px;
 }
 
 .movieDetail-poster .movie-img {

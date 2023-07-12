@@ -53,22 +53,27 @@ async function createMovies(movies, parentContainer, lazyLoad = false) {
 
             const movieImg = document.createElement('img');
             movieImg.classList.add('movie-img');
-            movieImg.setAttribute('alt', `${movie.title} poster`)
             observer.observe(movieImg);
             lazyLoad ? 
             movieImg.dataset.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}` :
             movieImg.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}` 
             if (movie.poster_path) movieContainer.appendChild(movieImg);
+            movieImg.setAttribute('alt', `${movie.title} poster`)
+            // console.log(movieImg);
             movieImg.addEventListener('error', () => {
-                const div = document.createElement('div');
-                if (parentContainer.className === 'relatedMovies-scrollContainer') {
-                    div.classList.add('relatedMovies-img-container--noimg');
-                }
-                div.classList.add('img-container--noimg');
-                const span = document.createElement('span');
-                span.textContent = movie.title;
-                div.append(span);
-                movieContainer.prepend(div);
+                // console.log(movieImg);
+                // const div = document.createElement('div');
+                // if (parentContainer.className === 'relatedMovies-scrollContainer') {
+                //     div.classList.add('relatedMovies-img-container--noimg');
+                // }
+                // div.classList.add('img-container--noimg');
+                // const span = document.createElement('span');
+                // span.textContent = movie.title;
+                // div.append(span);
+                // movieContainer.prepend(div);
+                movieImg.src = './src/assets/no-image.svg';
+                movieImg.classList.add('no-image');
+                movieContainer.prepend(movieImg);
             });
 
 
@@ -185,13 +190,38 @@ async function getMovieDetails(id) {
     const movieDetailPoster = document.createElement('img');
     movieDetailPoster.id = 'movieDetail-poster';
     movieDetailPoster.classList.add('movie-img');
-    movieDetailPosterContainer.append(movieDetailPoster);
+    // movieDetailPosterContainer.append(movieDetailPoster);
     movieDetailTitle.textContent = movie.title;
     movieDetailTitle.href = location.href;
     movieDetailDescription.textContent = movie.overview;
     movieDetailScore.textContent = movie.vote_average.toFixed(1);
-    movieDetailPoster.dataset.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+
     observer.observe(movieDetailPoster);
+    if (movie.poster_path) {
+        movieDetailPoster.dataset.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+    } else {
+        movieDetailPoster.classList.add('no-image')
+        movieDetailPoster.src = './src/assets/no-image.svg'; 
+    }
+    movieDetailPosterContainer.append(movieDetailPoster);
+    
+        // console.log(movieDetailPoster);
+    
+/*     movieDetailPoster.addEventListener('error', () => {
+ 
+        // const div = document.createElement('div');
+        // if (parentContainer.className === 'relatedMovies-scrollContainer') {
+        //     div.classList.add('relatedMovies-img-container--noimg');
+        // }
+        // div.classList.add('img-container--noimg');
+        // const span = document.createElement('span');
+        // span.textContent = movie.title;
+        // div.append(span);
+        // movieContainer.prepend(div);
+        movieDetailPoster.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+        movieDetailPosterContainer.append(movieDetailPoster);
+    }); */
+
 
     const [releaseYear, , ] = movie.release_date.split('-');
     
