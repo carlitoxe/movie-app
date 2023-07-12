@@ -360,27 +360,16 @@ form svg {
   font-size: 1.3rem;
 }
 
-  .img-container--noimg {
-    display: flex;
-    background: var(--lightGrey);
-    border-radius: 8px;
-    height: 187.5px;
-    min-height: 187.5px;
-    max-height: 187.5px;
-    width: 125px;
-    min-width: 125x;
-    max-width: 125px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0;
-  }
+.relatedMovies-img-container--noimg {
+  background-color: var(--lightGrey);
+}
 
-  .img-container--noimg span {
-    text-align: center;
-    font-size: 1.2rem;  
-    padding: 0 1rem;
-    color: black;
-  }
+.relatedMovies-img-container--noimg span {
+  text-align: center;
+  font-size: 1.2rem;  
+  padding: 0 1rem;
+  color: black;
+}
 
 
 }
