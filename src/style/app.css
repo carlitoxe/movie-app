@@ -72,7 +72,7 @@ a {
 }
 
 .header-title--categoryView {
-  margin-bottom: 1rem;
+  margin: 1.5rem 0;
 }
 
 .movieDetail-title-link {
@@ -340,6 +340,10 @@ form svg {
       top: 0;
       width: 100%;
     }
+
+    .header-title--categoryView {
+      margin: 0 0 1rem 0;
+  }
 
     h1 {
       color: white;
