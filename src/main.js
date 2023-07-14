@@ -1,3 +1,5 @@
+// DATA
+
 const API_KEY = '123293c6c692ce641570f9a57a28a2fa';
 
 const api = axios.create({
@@ -8,8 +10,40 @@ const api = axios.create({
     params: {
         'api_key': API_KEY,
     }
-
 })
+
+function likedMoviesList() {
+    const item = JSON.parse(localStorage.getItem('liked_movies'));   
+    let movies;
+
+    if (item) {
+        movies = item;
+    } else {
+        movies = {};
+    }
+
+    return movies
+}
+
+function likeMovie(movie) {
+    // console.log(likedMoviesList());
+
+    const likedMovies = likedMoviesList();
+    console.log(likedMovies);
+    if (likedMovies[movie.id]) {
+        console.log('Movie deleted from fav');
+        likedMovies[movie.id] = undefined;
+    } else {
+        console.log('Movie added to favs');
+        likedMovies[movie.id] = movie;
+    }
+    if (location.hash.startsWith('#home')){
+        homePage();
+      }
+
+    localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+
+}
 
 searchFormInput.addEventListener('focusin', () => {
     searchForm.classList.add('search-form--focused')
@@ -55,10 +89,7 @@ async function createMovies(
 
         const movieContainer = document.createElement('div');
         movieContainer.classList.add('movie-container');
-        movieContainer.addEventListener('click', () => {
-            location.hash = `movie=${movie.id}`;
-        });
-
+   
             const movieImg = document.createElement('img');
             movieImg.classList.add('movie-img');
             observer.observe(movieImg);
@@ -88,8 +119,22 @@ async function createMovies(
                 movieImg.classList.add('no-image');
                 movieContainer.prepend(movieImg);
             });
+            movieImg.addEventListener('click', () => {
+                location.hash = `movie=${movie.id}`;
+            });
 
-
+            const likeMovieBtn = document.createElement('button');
+            likeMovieBtn.classList.add('movie-button');
+            // likeMovieBtn.textContent = '🤍'
+            
+            likedMoviesList()[movie.id] && likeMovieBtn.classList.add('movie-button--liked');
+            likeMovieBtn.addEventListener('click', () => {
+                likeMovieBtn.classList.toggle('movie-button--liked');
+                //ADD MOVIE TO LOCALSTORAGE
+                likeMovie(movie);
+                getLikedMovies();
+            });
+            movieContainer.appendChild(likeMovieBtn);
             // DIV FOR NO IMG 
             // const div = document.createElement('div');
             // div.classList.add('img-container--noimg');
@@ -106,6 +151,10 @@ async function createMovies(
         const movieTitle = document.createElement('a');
         movieTitle.classList.add('movie-title');
         movieTitle.textContent = movie.title;
+        
+        movieTitle.addEventListener('click', () => {
+            location.hash = `movie=${movie.id}`;
+        });
         
         movieContainer.append(movieScore, movieTitle);
         //parentContainer.appendChild(movieContainer);
@@ -442,16 +491,23 @@ async function getCast(id) {
     castContainer.innerHTML = '';
     castContainer.scrollTo(0, 0);
     cast.forEach(actor => { 
-        if (!actor.profile_path) {
-            return;
-        }
+        
         const actorContainer = document.createElement('li');
         actorContainer.classList.add('actor-container');
         const actorImg = document.createElement('img');
         actorImg.classList.add('actor-img');
         actorImg.alt = `${actor.name} image`;
-        actorImg.dataset.src = `https://www.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`;
+  
         observer.observe(actorImg);
+
+        if (actor.profile_path) {
+            actorImg.dataset.src = `https://www.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`;
+            actorContainer.appendChild(actorImg)  
+        } else {
+            actorImg.src = './src/assets/no-image.svg';
+            actorImg.classList.add('no-image');
+            actorContainer.prepend(actorImg);
+        }
         
         const actorName = document.createElement('p');
         actorName.classList.add('actor-name');
@@ -496,4 +552,17 @@ async function getTrailerMovie(id) {
 
 
     
+}
+
+function getLikedMovies() {
+    const likedMovies = likedMoviesList();
+
+    const moviesArray = Object.values(likedMovies);
+
+    createMovies(moviesArray, likedMoviesListArticle, { lazyLoad: true, clean: true });
+    // window.addEventListener('storage', () => {
+    //     createMovies(moviesArray, likedMoviesListArticle, { lazyLoad: true, clean: true });
+
+    // });
+    console.log(moviesArray);
 }

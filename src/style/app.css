@@ -188,7 +188,7 @@ form svg {
     margin-top: 1.3rem;
 }
 
-.trendingPreview-header {
+.trendingPreview-header, .liked-header {
   padding: 0 3rem;
 }
 
@@ -196,12 +196,16 @@ form svg {
     padding: 0 5rem;
   }
 
-  .trendingPreview-container {
+  .trendingPreview-container, .liked-container {
     margin-top: 0.5rem;
     padding: 0 1rem;
   }
   
-  .trendingPreview-header, .categoriesPreview-title {
+  .liked-header {
+    display: flex;
+  }
+
+  .trendingPreview-header, .categoriesPreview-title, .liked-header {
     margin-bottom: 0.5rem;
   }
   
@@ -259,6 +263,8 @@ form svg {
   .movie-img {
     border-radius: 8px;
   }
+
+  
 
   .no-image {
     object-fit: cover;
@@ -350,12 +356,12 @@ form svg {
       text-align: center;
   }
 
-  .trendingPreview-container {
+  .trendingPreview-container, .liked-container {
     padding: 0px;
   }
 
 
-.trendingPreview-header, .categoriesPreview-container {
+.trendingPreview-header, .categoriesPreview-container, .liked-header {
   padding: 0 2rem;
 }
 
@@ -396,7 +402,7 @@ form svg {
     width: 90px;
   }
   
-  .trendingPreview-movieList {
+  .trendingPreview-movieList, .likedMovies-list {
     display: flex;
     margin-right: 1rem;
     overflow-x: scroll;
@@ -408,12 +414,42 @@ form svg {
     padding-bottom: 16px;
   }
   
-
   .movie-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     margin-right: 1rem;
+    position: relative;
+  }
+
+  .likedMovies-list .movie-container {
+    max-width: 150px;
+  }
+
+  .movie-button {
+    border-radius: 30px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    height: 34px;
+    width: 34px;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .movie-button::before {
+    content: '♡';
+  }
+  
+  .movie-button--liked {
+    font-size: 1rem;
+    background-color: white;
+  }
+
+  .movie-button--liked::before {
+    content: '❤️';
+
   }
 
   .movie-title {
@@ -435,7 +471,7 @@ form svg {
     color: var(--highlight-blue);
   }
   
-  .trendingPreview-movieList .movie-img {
+  .trendingPreview-movieList .movie-img, .likedMovies-list .movie-img {
     height: 225px;
     min-height: 225px;
     max-height: 225px;
@@ -658,6 +694,9 @@ form svg {
 
 .actor-img {
   border-radius: 8px 8px 0 0;
+  max-width: 138px;
+  min-height: 175px;
+  max-height: 175px;
 }
 
 .trailer-container {

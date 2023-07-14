@@ -77,10 +77,15 @@ function homePage() {
     categoriesPreviewSection.classList.remove('inactive');
     genericSection.classList.add('inactive');
     movieDetailSection.classList.add('inactive');
+    likedMoviesSection.classList.remove('inactive');
+    searchQuery.classList.add('inactive');
+
 
     getTrendingMoviesPreview();
     getCategoriesPreview();
-    smoothscroll();
+    getLikedMovies();
+
+    // smoothscroll();
 }
 
 function searchPage() {
@@ -102,7 +107,7 @@ function searchPage() {
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     // headerCategoryTitle.classList.remove('inactive');
-
+    likedMoviesSection.classList.add('inactive');
     searchQuery.classList.remove('inactive');
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
@@ -133,6 +138,7 @@ function trendingPage() {
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     headerCategoryTitle.classList.remove('inactive');
+    likedMoviesSection.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
@@ -166,7 +172,8 @@ function movieDetailsPage() {
     headerSection.classList.add('header-container--long');
     // headerSection.style.background = '';
     headerCategoryTitle.classList.add('inactive');
-    
+    likedMoviesSection.classList.add('inactive');
+
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.add('inactive');
@@ -198,6 +205,7 @@ function categoriesPage() {
     headerSection.classList.remove('header-container--long');
     headerSection.style.background = '';
     headerCategoryTitle.classList.remove('inactive');
+    likedMoviesSection.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');

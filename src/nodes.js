@@ -7,6 +7,7 @@ const trendingPreviewSection = $('#trendingPreview');
 const categoriesPreviewSection = $('#categoriesPreview');
 const genericSection = $('#genericList');
 const movieDetailSection = $('#movieDetail');
+const likedMoviesSection = $('.liked-container');
 
 /* Lists & Containers */
 
@@ -21,6 +22,8 @@ const castContainer = $('.cast-scrollContainer');
 
 const movieDetailPosterContainer = $('.movieDetail-poster');
 const trailerContainer = $('.iframe-container');
+
+const likedMoviesListArticle = $('.likedMovies-list');
 
 // Elements
 
