@@ -195,12 +195,13 @@ button {
   align-items: center;
 }
 
-.select-language-container, .menu-select-language-container {
+.select-language-container {
   height: 2rem;
   background-color: var(--highlight-blue);
   margin-right: 1rem;
   border-radius: 8px;
   font-size: 1rem;
+  color: black;
   max-width: 11rem;
 }
 
