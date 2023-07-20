@@ -14,7 +14,6 @@ const api = axios.create({
     }
 })
 
-createLanguages();
 
 // Change language
 
@@ -23,48 +22,47 @@ createLanguages();
 function createLanguages() {
     selectLanguageContainer.innerText = '';
     // selectLanguageContainerMobile.innerText = '';
-
+    
     languagesArr.forEach(language => {
-         // console.log(language);
+        // console.log(language);
         let optionLanguage = document.createElement('option');
         optionLanguage.name = language.english_name;
         optionLanguage.innerText = `${language.flag} ${language.name}`;
         optionLanguage.value = language.iso_639_1;
         optionLanguage.classList.add('optLang');
-        const optionLanguage2 = optionLanguage.cloneNode(true);
-
+        
         selectLanguageContainer.append(optionLanguage);
         // selectLanguageContainerMobile.append(optionLanguage2);
     })
 }
+createLanguages();
 
 async function getWords() {
 	let langWords = localStorage.getItem('lang');
     let [langWord, ] = langWords.split('-');
-  
-    console.log(langWord);
+    // console.log(langWord);
 	const languageTexts = await fetch('./src/lang.json');
 	const data = await languageTexts.json();
 	return data[langWord];
 }
 
 async function setDefaultLang() {
-	if (!localStorage.getItem("lang")) {
-		if (navigator.language.includes("-")) {
-			const navLang = navigator.language.split("-");
+    if (!localStorage.getItem("lang")) {
+        if (navigator.language.includes("-")) {
+            const navLang = navigator.language.split("-");
 			localStorage.setItem("lang", navLang[0]);
 		} else {
-			localStorage.setItem("lang", navigator.language);
+            localStorage.setItem("lang", navigator.language);
 		}
 	}
+    // console.log(localStorage.getItem('lang'));
 	// langu.value = !localStorage.getItem('lang') ? localStorage.getItem('lang') : navigator.language;
-    if (localStorage.getItem('lang')) {
-        langu.value = localStorage.getItem('lang');
-    } else {
+    if (!localStorage.getItem('lang')) {
         langu.value = navigator.language;
+    } else {
+        langu.value = localStorage.getItem('lang');  
     }
 	const langWords = await getWords();
-    console.log(langu.value);
     console.log(langWords);
 	trendingPreviewTitle.innerText = langWords["Trending"];
 	trendingBtn.innerText = langWords["See More"];
@@ -102,7 +100,6 @@ function changeLang() {
     localStorage.setItem("lang", langu.value);
 	location.reload();
 }
-
 
 function likedMoviesList() {
     const item = JSON.parse(localStorage.getItem('liked_movies'));   
@@ -284,7 +281,7 @@ async function getTrendingMoviesPreview() {
     const { data } = await api('trending/movie/day');
     const movies = data.results;
 
-    createMovies(movies, trendingMovieListContainer, true);
+    createMovies(movies, trendingMovieListContainer, { lazyLoad: true });
 }
 
 async function getCategoriesPreview() { 
