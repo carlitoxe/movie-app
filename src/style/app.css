@@ -509,6 +509,9 @@ form svg {
   }
 
   .movie-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 30px;
     position: absolute;
     top: 5px;
@@ -517,7 +520,6 @@ form svg {
     width: 34px;
     font-size: 22px;
     font-weight: 600;
-    text-align: center;
   }
   
   .movie-button::before {
