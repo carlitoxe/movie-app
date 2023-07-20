@@ -1,7 +1,6 @@
 // DATA
 
 const API_KEY = '123293c6c692ce641570f9a57a28a2fa';
-
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {
@@ -9,8 +8,101 @@ const api = axios.create({
     },      
     params: {
         'api_key': API_KEY,
+        'language': localStorage.getItem("lang")
+        ? localStorage.getItem("lang")
+        : navigator.language[0] + navigator.language[1],
     }
 })
+
+createLanguages();
+
+// Change language
+
+// let lang = navigator.language;
+
+function createLanguages() {
+    selectLanguageContainer.innerText = '';
+    // selectLanguageContainerMobile.innerText = '';
+
+    languagesArr.forEach(language => {
+         // console.log(language);
+        let optionLanguage = document.createElement('option');
+        optionLanguage.name = language.english_name;
+        optionLanguage.innerText = `${language.flag} ${language.name}`;
+        optionLanguage.value = language.iso_639_1;
+        optionLanguage.classList.add('optLang');
+        const optionLanguage2 = optionLanguage.cloneNode(true);
+
+        selectLanguageContainer.append(optionLanguage);
+        // selectLanguageContainerMobile.append(optionLanguage2);
+    })
+}
+
+async function getWords() {
+	let langWords = localStorage.getItem('lang');
+    let [langWord, ] = langWords.split('-');
+  
+    console.log(langWord);
+	const languageTexts = await fetch('./src/lang.json');
+	const data = await languageTexts.json();
+	return data[langWord];
+}
+
+async function setDefaultLang() {
+	if (!localStorage.getItem("lang")) {
+		if (navigator.language.includes("-")) {
+			const navLang = navigator.language.split("-");
+			localStorage.setItem("lang", navLang[0]);
+		} else {
+			localStorage.setItem("lang", navigator.language);
+		}
+	}
+	// langu.value = !localStorage.getItem('lang') ? localStorage.getItem('lang') : navigator.language;
+    if (localStorage.getItem('lang')) {
+        langu.value = localStorage.getItem('lang');
+    } else {
+        langu.value = navigator.language;
+    }
+	const langWords = await getWords();
+    console.log(langu.value);
+    console.log(langWords);
+	trendingPreviewTitle.innerText = langWords["Trending"];
+	trendingBtn.innerText = langWords["See More"];
+	searchFormInput.placeholder = langWords["Search Here ..."];
+	categoriesTitle.innerText = langWords["Categories"];
+}
+setDefaultLang();
+
+document.addEventListener('click', (e) => {
+    // console.log(e.target);
+    // console.log(e.target.classList.contains('header-menu'));
+    const target = e.target;
+    if(!target.classList.contains('header-menu') && 
+    !target.classList.contains('hamburger-button') && 
+    !target.classList.contains('hamburger-menu') && 
+    !target.classList.contains('select-language-container')
+    ) {
+        const sideMenu = document.querySelector('.header-menu');
+        sideMenu.classList.remove('header-menu-open');
+    }
+});
+
+hamburgerBtn.addEventListener('click', () => {
+    const sideMenu = document.querySelector('.header-menu');
+    const sideMenuIsOpen = sideMenu.classList.contains('header-menu-open');
+    sideMenuIsOpen ? sideMenu.classList.remove('header-menu-open') : sideMenu.classList.add('header-menu-open');
+});
+
+
+selectLanguageContainer.addEventListener('change', changeLang)
+
+// selectLanguageContainerMobile.addEventListener('change', changeLang)
+
+function changeLang() {
+    localStorage.setItem("lang", langu.value);
+	location.reload();
+}
+
 
 function likedMoviesList() {
     const item = JSON.parse(localStorage.getItem('liked_movies'));   
@@ -365,7 +457,11 @@ async function getMovieDetails(id) {
     // const loading = document.querySelector('.movieDetail-poster--loading');
     // loading.classList.add('inactive');
     // movieDetailSection.innerHTML = '';
-    movieDetailPosterContainer.innerHTML = ''
+    movieDetailPosterContainer.innerHTML = '';
+    const langWords = await getWords();
+    movieDetailCastTitle.innerText = langWords["Cast"];
+    movieDetailTrailerTitle.innerText = langWords["Trailer"];
+    relatedMoviesTitle.innerText = langWords['Recommendations']
     const movieDetailPoster = document.createElement('img');
     movieDetailPoster.id = 'movieDetail-poster';
     movieDetailPoster.classList.add('movie-img');
@@ -560,9 +656,16 @@ function getLikedMovies() {
     const moviesArray = Object.values(likedMovies);
 
     createMovies(moviesArray, likedMoviesListArticle, { lazyLoad: true, clean: true });
+
+    if (moviesArray.length < 1) {
+        likedMoviesSection.classList.add('inactive');
+    } else {
+        likedMoviesSection.classList.remove('inactive'); 
+    }
+    // console.log(moviesArray.length);
     // window.addEventListener('storage', () => {
     //     createMovies(moviesArray, likedMoviesListArticle, { lazyLoad: true, clean: true });
 
     // });
-    console.log(moviesArray);
+    // console.log(moviesArray);
 }

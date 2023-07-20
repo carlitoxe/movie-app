@@ -131,7 +131,7 @@ button {
 .header-container {
     display: flex;
     justify-content: space-around;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
 }
 
 
@@ -147,8 +147,66 @@ button {
     color: white;
 }
 
+.header-menu {
+  background: black;
+  box-shadow: 0 0 10px black;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  max-width: 15rem;
+  padding: 2rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  transition: all .3s cubic-bezier(.645,.045,.355,1);
+  visibility: hidden;
+  width: 80vw;
+  will-change: transform,visibility;
+  z-index: 1;
+}
+
+.header-menu-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.header-menu-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header-container-left {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2rem;
+  align-items: center;
+  height: 5.5rem;
+}
+
+.header-container-right {
+  display: flex;
+  align-items: center;
+}
+
+.select-language-container, .menu-select-language-container {
+  height: 2rem;
+  background-color: var(--highlight-blue);
+  margin-right: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  max-width: 11rem;
+}
+
 .search-form--focused {
-    outline: 2px solid var(--highlight-blue)
+    outline: 2px solid var(--highlight-blue);
+    
 }
 
 input {
@@ -184,7 +242,7 @@ form svg {
     margin: 1.5rem 2rem;
 }
 
-.search-form-container {
+.search-form-container, .select-language-container {
     margin-top: 1.3rem;
 }
 
@@ -385,9 +443,33 @@ form svg {
   color: black;
 }
 
+.select-language-container {
+  display: none;
+}
 
 }
 
+.hamburger-button {
+  background-color: transparent;
+  z-index: 2;
+}
+
+.hamburger-menu {
+  filter: invert(62%) sepia(49%) saturate(3671%) hue-rotate(155deg) brightness(86%) contrast(85%);
+}
+
+.header-menu .select-language-container {
+  display: block;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .hamburger-button {
+    display: none;
+  }
+
+
+}
 /* Trending */
 
 .trendingPreview-header {
