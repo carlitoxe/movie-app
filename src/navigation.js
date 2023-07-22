@@ -192,6 +192,7 @@ function movieDetailsPage() {
     movieDetailSection.classList.remove('inactive');
     searchQuery.classList.add('inactive');
     hamburgerBtn.classList.add('inactive');
+    likedMoviesSection.classList.add('inactive');
 
     const [ , movieId] = location.hash.split('='); 
 

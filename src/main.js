@@ -1,6 +1,6 @@
 // DATA
 
-const API_KEY = '123293c6c692ce641570f9a57a28a2fa';
+const API_KEY = '123293c6c692ce641570f9a57a28a2fa'; 
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {
@@ -55,15 +55,13 @@ async function setDefaultLang() {
             localStorage.setItem("lang", navigator.language);
 		}
 	}
-    // console.log(localStorage.getItem('lang'));
-	// langu.value = !localStorage.getItem('lang') ? localStorage.getItem('lang') : navigator.language;
     if (!localStorage.getItem('lang')) {
         langu.value = navigator.language;
     } else {
         langu.value = localStorage.getItem('lang');  
     }
+    // console.log(langu.value);
 	const langWords = await getWords();
-    console.log(langWords);
 	trendingPreviewTitle.innerText = langWords["Trending"];
 	trendingBtn.innerText = langWords["See More"];
 	searchFormInput.placeholder = langWords["Search Here ..."];
@@ -654,10 +652,12 @@ function getLikedMovies() {
 
     createMovies(moviesArray, likedMoviesListArticle, { lazyLoad: true, clean: true });
 
-    if (moviesArray.length < 1) {
-        likedMoviesSection.classList.add('inactive');
+    if (moviesArray.length > 0) {
+        if (location.hash === '') {
+            likedMoviesSection.classList.remove('inactive'); 
+        }
     } else {
-        likedMoviesSection.classList.remove('inactive'); 
+        likedMoviesSection.classList.add('inactive');
     }
     // console.log(moviesArray.length);
     // window.addEventListener('storage', () => {
