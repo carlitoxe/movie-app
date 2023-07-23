@@ -139,6 +139,7 @@ function trendingPage() {
         headerTitle.classList.add('inactive');
         arrowBtn.classList.remove('inactive');
         searchForm.classList.add('inactive');
+        headerContainerLeft.classList.add('inactive');
     } else {
         arrowBtn.classList.add('inactive');
         headerTitle.classList.remove('inactive');
