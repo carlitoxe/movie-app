@@ -627,7 +627,6 @@ form svg {
 
 .genericList-container {
     display: flex;
-    align-items: center;
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
@@ -638,6 +637,7 @@ form svg {
     /* display: inline-block; */
     width: 200px;
     margin: 0;
+    height: ;
   }
   
   .genericList-container .movie-img {

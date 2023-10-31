@@ -300,7 +300,7 @@ async function getMoviesByCategory(id) {
 
     const movies = data.results;
     maxPage = data.total_pages;
-    console.log(maxPage);
+    // console.log(maxPage);
     createMovies(movies, genericSection, { lazyLoad: true })
 }
 
@@ -310,7 +310,6 @@ async function getMoreMoviesByCategory() {
     console.log(scrollIsBottom);
     if (scrollIsBottom) {
         const id = location.hash.split('=')[1].split('-')[0];
-        
         page++;
         const { data } = await api('discover/movie', {
             params: {
@@ -625,7 +624,7 @@ async function getCast(id) {
 }
 
 async function getTrailerMovie(id) {
-    const { data } = await api(`movie/${id}/videos`);
+    const { data } = await api(x);
     const videos = data.results;
     // console.log(videos);
 
@@ -641,7 +640,7 @@ async function getTrailerMovie(id) {
         movieDetailTrailerContainer.classList.add('inactive');
     }
 
-
+    
     
 }
 
