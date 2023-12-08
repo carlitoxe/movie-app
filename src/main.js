@@ -624,9 +624,9 @@ async function getCast(id) {
 }
 
 async function getTrailerMovie(id) {
-    const { data } = await api(x);
+    const { data } = await api(`movie/${id}/videos`);
     const videos = data.results;
-    // console.log(videos);
+    console.log(videos);
 
     
     const officialTrailer = videos.find(video => video.type === 'Trailer' && video.official);
